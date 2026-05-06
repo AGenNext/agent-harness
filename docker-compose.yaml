@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  harness:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: harness
+    ports:
+      - "3000:3000"
+      - "3022:3022"
+    volumes:
+      - harness_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HARNESS_SECRET=your-secret-key-change-me
+      - HARNESS_DEBUG=false
+    restart: unless-stopped
+
+volumes:
+  harness_data:

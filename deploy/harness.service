@@ -1,0 +1,23 @@
+[Unit]
+Description=agent-harness DevOps Platform
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/harness
+ExecStartPre=/usr/bin/docker pull ghcr.io/agennext/agent-harness:latest
+ExecStart=/usr/bin/docker run --rm \
+    --name harness \
+    -p 3000:3000 \
+    -p 3022:3022 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v harness_data:/data \
+    -e HARNESS_SECRET=${HARNESS_SECRET} \
+    --restart unless-stopped \
+    ghcr.io/agennext/agent-harness:latest
+ExecStop=/usr/bin/docker stop -t 10 harness
+
+[Install]
+WantedBy=multi-user.target

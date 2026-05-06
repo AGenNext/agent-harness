@@ -1,0 +1,29 @@
+{
+  "name": "Code Commit",
+  "version": "1.0.0",
+  "description": "GitHub + VS Code + Docker + 4 AI Agents",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^28.0.0",
+    "@electron/remote": "^2.1.0",
+    "monaco-editor": "^0.45.0",
+    "dockerode": "^4.0.0",
+    "octokit": "^3.0.0",
+    "openai": "^4.0.0",
+    "anthropic": "^0.25.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.agennext.codecommit",
+    "productName": "Code Commit",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ]
+  }
+}

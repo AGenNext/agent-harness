@@ -35,19 +35,21 @@
 
 ### Desktop (App)
 
-| Agent | App |
-|------|-----|
-| code-assist | code-commit-assist.exe |
-| code-review | code-commit-review.exe |
-| code-tester | code-commit-tester.exe |
-| code-deploy | code-commit-deploy.exe |
+**One app** = GitHub + VS Code + Docker + **4 AI Agents**
 
-### Docker (Optional)
+| Feature | Tool |
+|---------|------|
+| Repo/PR/Issues | GitHub API |
+| Code editor | Monaco (VS Code) |
+| Containers | Docker Engine |
+| Write code | code-assist |
+| Review code | code-review |
+| Run tests | code-tester |
+| Deploy | code-deploy
 
 ```bash
-docker run agennext/code-commit-assist
-docker run agennext/code-commit-review
-# etc
+# Build
+code-commit.exe
 ```
 
 ---

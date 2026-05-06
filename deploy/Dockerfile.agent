@@ -1,0 +1,23 @@
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /app
+
+RUN go install github.com/harness/gitness/cmd/gitness@latest
+
+FROM alpine:3.18
+
+RUN apk add --no-cache git docker-cli
+
+WORKDIR /app
+
+COPY --from=builder /go/bin/gitness /usr/local/bin/
+
+# Agent environment
+ENV GITHUB_TOKEN=
+ENV OPENAI_API_KEY=
+ENV HARNESS_SECRET=dev-secret
+
+EXPOSE 3000 3022
+
+ENTRYPOINT ["gitness"]
+CMD ["--docker-host", "/var/run/docker.sock", "--port", "3000"]
